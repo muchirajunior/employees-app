@@ -19,11 +19,11 @@ class CityResource extends Resource
 {
     protected static ?string $model = City::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingStorefront;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::MapPin;
 
     protected static ?string $recordTitleAttribute = 'City';
 
-    protected static  string | UnitEnum | null  $navigationGroup = "Master Data";
+    protected static  string | UnitEnum | null  $navigationGroup = "System Data";
 
     protected static ?int $navigationSort = 3;
 

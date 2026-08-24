@@ -27,7 +27,7 @@ class CountryResource extends Resource
 
     protected static ?string $modelLabel = 'All My Countries';
 
-    protected static  string | UnitEnum | null  $navigationGroup = "Master Data";
+    protected static  string | UnitEnum | null  $navigationGroup = "System Data";
 
     protected static ?int $navigationSort = 1;
 
