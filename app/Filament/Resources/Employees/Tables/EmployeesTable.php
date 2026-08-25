@@ -30,18 +30,18 @@ class EmployeesTable
                 TextColumn::make('date_of_hire')
                     ->date()
                     ->sortable(),
-                TextColumn::make('country_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('state_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('city_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('department_id')
-                    ->numeric()
-                    ->sortable(),
+                // TextColumn::make('country_id')
+                //     ->numeric()
+                //     ->sortable(),
+                // TextColumn::make('state_id')
+                //     ->numeric()
+                //     ->sortable(),
+                // TextColumn::make('city_id')
+                //     ->numeric()
+                //     ->sortable(),
+                // TextColumn::make('department_id')
+                //     ->numeric()
+                //     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
