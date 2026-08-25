@@ -2,11 +2,16 @@
 
 namespace App\Filament\Resources\Employees\Schemas;
 
+use App\Models\City;
+use App\Models\State;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Collection;
 
 class EmployeeForm
 {
@@ -30,22 +35,29 @@ class EmployeeForm
                     DatePicker::make('date_of_hire')->required(),
                 ]),
 
-                 Section::make('Name')->description('Names details')->schema([
+                 Section::make('Location details')->schema([
                      Select::make('Country')
                     ->required()
                     ->relationship(name:'country', titleAttribute:'name')
+                    ->live()
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->afterStateUpdated(function (Set $set){
+                        $set('state', null);
+                        $set('city', null);
+                    }),
 
                      Select::make('state')
                     ->required()
-                    ->relationship(name:'state', titleAttribute:'name')
+                    ->options(fn(Get $get): Collection => State::query()->where('country_id', $get('Country'))->pluck('name','id'))
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->live()
+                    ->afterStateUpdated(fn (Set $set)=> $set('city',null)),
 
                      Select::make('city')
                     ->required()
-                    ->relationship(name:'city', titleAttribute:'name')
+                    ->options(fn(Get $get): Collection => City::query()->where('state_id', $get('state'))->pluck('name','id'))
                     ->searchable()
                     ->preload(),
 
@@ -57,18 +69,6 @@ class EmployeeForm
 
                 ])->columnSpan('full')->columns(2),
 
-                // TextInput::make('country_id')
-                //     ->required()
-                //     ->numeric(),
-                // TextInput::make('state_id')
-                //     ->required()
-                //     ->numeric(),
-                // TextInput::make('city_id')
-                //     ->required()
-                //     ->numeric(),
-                // TextInput::make('department_id')
-                //     ->required()
-                //     ->numeric(),
             ]);
     }
 }

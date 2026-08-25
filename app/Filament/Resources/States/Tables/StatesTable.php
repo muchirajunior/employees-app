@@ -14,9 +14,6 @@ class StatesTable
     {
         return $table
             ->columns([
-                TextColumn::make('country_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('created_at')
