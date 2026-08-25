@@ -12,8 +12,9 @@ class StateForm
     {
         return $schema
             ->components([
-                Select::make('Country')
+                Select::make('country_id')
                     ->required()
+                    ->name('Country')
                     ->relationship(name:'country', titleAttribute:'name')
                     ->searchable()
                     ->preload(),

@@ -31,37 +31,42 @@ class EmployeeForm
                 ]),
 
                 Section::make('Dates')->schema([
-                    DatePicker::make('date_of_birth')->required(),
-                    DatePicker::make('date_of_hire')->required(),
+                    DatePicker::make('date_of_birth')->required()->native(false),
+                    DatePicker::make('date_of_hire')->required()->native(false),
                 ]),
 
                  Section::make('Location details')->schema([
-                     Select::make('Country')
+                    Select::make('country_id')
+                    ->name('Country')
                     ->required()
                     ->relationship(name:'country', titleAttribute:'name')
                     ->live()
                     ->searchable()
                     ->preload()
                     ->afterStateUpdated(function (Set $set){
-                        $set('state', null);
-                        $set('city', null);
+                        $set('state_id', null);
+                        $set('city_id', null);
                     }),
 
-                     Select::make('state')
+                    Select::make('state_id')
+                    ->name('State')
                     ->required()
-                    ->options(fn(Get $get): Collection => State::query()->where('country_id', $get('Country'))->pluck('name','id'))
+                    ->options(fn(Get $get): Collection => State::query()->where('country_id', $get('country_id'))->pluck('name','id'))
                     ->searchable()
                     ->preload()
                     ->live()
-                    ->afterStateUpdated(fn (Set $set)=> $set('city',null)),
+                    ->afterStateUpdated(fn (Set $set)=> $set('city_id',null)),
 
-                     Select::make('city')
+                     Select::make('city_id')
+                    ->name('City')
+
                     ->required()
-                    ->options(fn(Get $get): Collection => City::query()->where('state_id', $get('state'))->pluck('name','id'))
+                    ->options(fn(Get $get): Collection => City::query()->where('state_id', $get('state_id'))->pluck('name','id'))
                     ->searchable()
                     ->preload(),
 
-                    Select::make('department')
+                    Select::make('department_id')
+                    ->name('Department')
                     ->required()
                     ->relationship(name:'department', titleAttribute:'name')
                     ->searchable()

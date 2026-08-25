@@ -12,8 +12,9 @@ class CityForm
     {
         return $schema
             ->components([
-                Select::make('State')
+                Select::make('state_id')
                     ->required()
+                    ->name('State')
                     ->relationship(name:'state', titleAttribute:'name')
                     ->searchable()
                     ->preload(),
