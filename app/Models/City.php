@@ -9,4 +9,10 @@ class City extends Model
 {
     /** @use HasFactory<\Database\Factories\CityFactory> */
     use HasFactory;
+
+    protected $fillable = ['state_id','name'];
+
+    public function state (){
+        return $this->belongsTo(State::class);
+    }
 }

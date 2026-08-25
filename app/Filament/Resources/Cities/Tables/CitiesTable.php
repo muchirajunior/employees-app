@@ -14,6 +14,7 @@ class CitiesTable
     {
         return $table
             ->columns([
+                TextColumn::make('name'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

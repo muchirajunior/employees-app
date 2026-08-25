@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Employees\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -28,6 +29,33 @@ class EmployeeForm
                     DatePicker::make('date_of_birth')->required(),
                     DatePicker::make('date_of_hire')->required(),
                 ]),
+
+                 Section::make('Name')->description('Names details')->schema([
+                     Select::make('Country')
+                    ->required()
+                    ->relationship(name:'country', titleAttribute:'name')
+                    ->searchable()
+                    ->preload(),
+
+                     Select::make('state')
+                    ->required()
+                    ->relationship(name:'state', titleAttribute:'name')
+                    ->searchable()
+                    ->preload(),
+
+                     Select::make('city')
+                    ->required()
+                    ->relationship(name:'city', titleAttribute:'name')
+                    ->searchable()
+                    ->preload(),
+
+                    Select::make('department')
+                    ->required()
+                    ->relationship(name:'department', titleAttribute:'name')
+                    ->searchable()
+                    ->preload(),
+
+                ])->columnSpan('full')->columns(2),
 
                 // TextInput::make('country_id')
                 //     ->required()
