@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Countries\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -16,6 +18,7 @@ class CountriesTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
+                TextColumn::make('phone_code'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -29,11 +32,13 @@ class CountriesTable
                 //
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make(),
                 ]),
             ]);
     }

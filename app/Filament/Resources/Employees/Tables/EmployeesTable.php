@@ -20,17 +20,21 @@ class EmployeesTable
                 TextColumn::make('last_name')
                     ->searchable(),
                 TextColumn::make('middle_name')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('address')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('zip_code')
                     ->searchable(),
                 TextColumn::make('date_of_birth')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('date_of_hire')
                     ->date()
                     ->sortable(),
+                 TextColumn::make('country.name'),
                 // TextColumn::make('country_id')
                 //     ->numeric()
                 //     ->sortable(),
