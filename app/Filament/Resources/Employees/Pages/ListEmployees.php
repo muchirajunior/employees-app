@@ -3,8 +3,12 @@
 namespace App\Filament\Resources\Employees\Pages;
 
 use App\Filament\Resources\Employees\EmployeeResource;
+use App\Models\Employee;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
+use Illuminate\Database\Eloquent\Builder;
+use Override;
 
 class ListEmployees extends ListRecords
 {
@@ -14,6 +18,18 @@ class ListEmployees extends ListRecords
     {
         return [
             CreateAction::make(),
+        ];
+    }
+
+    #[Override]
+    public function getTabs(): array {
+        return [
+            'All' => Tab::make(),
+            'This Week' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query)=> $query->where('date_hired','>=', now()->subWeek()))
+                ->badge(Employee::query()->where('date_hired','>=', now()->subWeek())->count()),
+            'This Month' => Tab::make()->modifyQueryUsing(fn (Builder $query)=> $query->where('date_hired','>=', now()->subMonth())),
+            'This Year' => Tab::make()->modifyQueryUsing(fn (Builder $query)=> $query->where('date_hired','>=', now()->subYear())),
         ];
     }
 }
