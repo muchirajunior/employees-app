@@ -6,8 +6,12 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmployeesTable
 {
@@ -35,18 +39,6 @@ class EmployeesTable
                     ->date()
                     ->sortable(),
                  TextColumn::make('country.name'),
-                // TextColumn::make('country_id')
-                //     ->numeric()
-                //     ->sortable(),
-                // TextColumn::make('state_id')
-                //     ->numeric()
-                //     ->sortable(),
-                // TextColumn::make('city_id')
-                //     ->numeric()
-                //     ->sortable(),
-                // TextColumn::make('department_id')
-                //     ->numeric()
-                //     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -57,7 +49,15 @@ class EmployeesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('Department')->relationship('department','name')->searchable()->preload(),
+                Filter::make('created_at')->schema([
+                    DatePicker::make('created_from')->native(false),
+                    DatePicker::make('created_until')->native(false),
+                ])->query(function (Builder $query, array $data): Builder{
+                    return $query
+                    ->when($data['created_from'], fn (Builder $query, $date): Builder => $query->whereDate('created_at','>=',$date))
+                    ->when($data['created_until'], fn (Builder $query, $date): Builder => $query->whereDate('created_at','<=',$date));
+                })
             ])
             ->recordActions([
                 EditAction::make(),
