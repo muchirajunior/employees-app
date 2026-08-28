@@ -6,6 +6,8 @@ use App\Filament\Resources\Countries\Pages\CreateCountry;
 use App\Filament\Resources\Countries\Pages\EditCountry;
 use App\Filament\Resources\Countries\Pages\ListCountries;
 use App\Filament\Resources\Countries\Pages\ViewCountry;
+use App\Filament\Resources\Countries\RelationManagers\EmployeesRelationManager;
+use App\Filament\Resources\Countries\RelationManagers\StatesRelationManager;
 use App\Filament\Resources\Countries\Schemas\CountryForm;
 use App\Filament\Resources\Countries\Tables\CountriesTable;
 use App\Filament\Schemas\CountryView;
@@ -55,7 +57,8 @@ class CountryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            StatesRelationManager::class,
+            EmployeesRelationManager::class,
         ];
     }
 
