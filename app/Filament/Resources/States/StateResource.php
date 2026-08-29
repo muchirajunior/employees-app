@@ -26,7 +26,7 @@ class StateResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::GlobeEuropeAfrica;
 
-    protected static ?string $recordTitleAttribute = 'State';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static  string | UnitEnum | null  $navigationGroup = "System Data";
 

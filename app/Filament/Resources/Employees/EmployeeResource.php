@@ -22,7 +22,7 @@ class EmployeeResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static ?string $recordTitleAttribute = 'Employee';
+    protected static ?string $recordTitleAttribute = 'first_name';
 
     protected static  string | UnitEnum | null  $navigationGroup = "Employee Management";
 
