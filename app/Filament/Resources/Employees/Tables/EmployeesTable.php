@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Employees\Tables;
 
 use Carbon\Carbon;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -78,6 +79,7 @@ class EmployeesTable
             ->recordActions([
                 EditAction::make(),
                 ViewAction::make(),
+                DeleteAction::make()->successNotificationTitle('Employee deleted successfully')
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
