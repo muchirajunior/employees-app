@@ -14,6 +14,9 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\Htmlable;
+use Override;
 use UnitEnum;
 
 class EmployeeResource extends Resource
@@ -25,6 +28,20 @@ class EmployeeResource extends Resource
     protected static ?string $recordTitleAttribute = 'first_name';
 
     protected static  string | UnitEnum | null  $navigationGroup = "Employee Management";
+
+    #[Override]
+    public static function getGloballySearchableAttributes(): array {
+        return ['first_name','middle_name','last_name'];
+    }
+
+    #[Override]
+    public static function getGlobalSearchResultDetails(Model $record): array  {
+        return [$record -> last_name];
+    }
+
+    public static function getNavigationBadge(): ?string {
+        return static::getModel()::count();
+    }
 
 
     public static function form(Schema $schema): Schema
