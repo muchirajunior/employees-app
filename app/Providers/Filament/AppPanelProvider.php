@@ -22,6 +22,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AppPanelProvider extends PanelProvider
@@ -48,7 +49,11 @@ class AppPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->userMenuItems([
-                Action::make('admin')->label('Admin')->icon(Heroicon::OutlinedCog8Tooth)->url('/admin')
+                Action::make('admin')
+                ->label('Admin')
+                ->icon(Heroicon::OutlinedCog8Tooth)
+                ->url('/admin')
+                ->visible(fn () => Auth::user()->is_admin)
             ])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\Filament\App\Widgets')
             ->widgets([
