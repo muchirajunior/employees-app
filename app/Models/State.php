@@ -19,4 +19,8 @@ class State extends Model
     public function cities(){
         return $this->hasMany(City::class);
     }
+
+    public function team(){
+        return $this->belongsTo(Team::class);
+    }
 }

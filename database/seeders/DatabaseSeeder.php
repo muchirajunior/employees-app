@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\State;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,11 +23,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+
+         $user = User::create([
             'name' => 'Muchira Junior',
             'email' => 'junior@example.com',
             'password'=>'1234'
         ]);
+
+        $team = Team::create([
+            'name' => 'Juniors',
+            'slug' => 'jn',
+        ]);
+
+        $team->members()->attach($user);
 
         Country::factory()->count(100)->create();
         State::factory()->count(40)->create();

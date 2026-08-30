@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\City;
-use App\Models\State;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<City>
+ * @extends Factory<Team>
  */
-class CityFactory extends Factory
+class TeamFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,9 +18,8 @@ class CityFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=>fake()->city(),
-            'state_id'=> State::inRandomOrder()->first()->id,
-            'team_id'=> Team::inRandomOrder()->first()->id,
+            'name' => fake()->company(),
+            'slug' => fake()->slug(1)
         ];
     }
 }

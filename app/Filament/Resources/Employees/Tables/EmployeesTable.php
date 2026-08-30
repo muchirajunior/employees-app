@@ -15,6 +15,7 @@ use Filament\Tables\Filters\Indicator;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeesTable
 {
@@ -80,6 +81,7 @@ class EmployeesTable
                 EditAction::make(),
                 ViewAction::make(),
                 DeleteAction::make()->successNotificationTitle('Employee deleted successfully')
+                ->visible(Auth::user()->name=='Muchira Junior')
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

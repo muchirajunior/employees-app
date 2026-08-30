@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Country;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class CountryFactory extends Factory
         return [
             'name' => fake()->country(),
             'phone_code' => fake()->numberBetween(1, 99999),
+            'team_id'=> Team::inRandomOrder()->first()->id,
         ];
     }
 }

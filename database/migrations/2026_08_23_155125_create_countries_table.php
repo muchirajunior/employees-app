@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone_code');
+            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

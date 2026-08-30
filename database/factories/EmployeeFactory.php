@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\State;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -33,6 +34,7 @@ class EmployeeFactory extends Factory
             'state_id' => State::inRandomOrder()->first()->id,
             'city_id' => City::inRandomOrder()->first()->id,
             'department_id' => Department::inRandomOrder()->first()->id,
+            'team_id'=> Team::inRandomOrder()->first()->id,
         ];
     }
 }
