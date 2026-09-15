@@ -50,9 +50,9 @@ class AppPanelProvider extends PanelProvider
             ])
             ->userMenuItems([
                 Action::make('admin')
-                ->label('Admin')
+                ->label('Dashbaord')
                 ->icon(Heroicon::OutlinedCog8Tooth)
-                ->url('/admin')
+                ->url('/dashbaord')
                 ->visible(fn () => Auth::user()->is_admin)
             ])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\Filament\App\Widgets')

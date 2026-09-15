@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->id('admin')
-            ->path('admin')
+            ->path('dashboard')
             ->profile()
             ->colors([
                 'primary' => Color::Amber,
@@ -73,6 +73,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 VerifyIsAdmin::class,
-            ]);
+            ])
+            ->tenant(Team::class, slugAttribute: 'slug');
     }
 }
